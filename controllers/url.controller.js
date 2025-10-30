@@ -66,3 +66,19 @@ export const updateUrl = async (req, res) => {
         return res.json("Invalid URL");
     }
 }
+
+export const deleteUrl = async (req, res) => {
+    try {
+        const urlId = req.params.urlId;
+
+        const url = await Url.findOneAndDelete({ urlId });
+        if(!url) {
+            return res.status(404).json("No such url exists");
+        }
+
+        return res.status(204).json("URL deleted successfully");
+    } catch (error) {
+        console.log(error);
+    }
+}
+
