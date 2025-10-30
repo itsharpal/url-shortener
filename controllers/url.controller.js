@@ -82,3 +82,38 @@ export const deleteUrl = async (req, res) => {
     }
 }
 
+export const redirectUrl = async (req, res) => {
+    try {
+        const urlId = req.params.urlId;
+
+        const url = await Url.findOneAndUpdate({urlId});
+        if(!url) {
+            return res.status(404).json("No such urlId exists !");
+        }
+
+        url.accessCount+=1;
+        await url.save();
+
+        return res.redirect(url.originalUrl);
+        
+    } catch (error) {
+        console.error(error);
+    }
+}
+
+export const getStats = async (req, res) => {
+    try {
+        const urlId = req.params.urlId;
+
+        const url = await Url.findOne({urlId});
+        if(!url) {
+            return res.status(404).json("No such urlId exists !");
+        }
+
+        return res.status(200).json({
+            accessCount : url.accessCount
+        });
+    } catch (error) {
+        console.log(error);
+    }
+}
