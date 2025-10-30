@@ -32,5 +32,17 @@ export const shortenUrl = async (req, res) => {
 }
 
 export const retrieveUrl = async (req, res) => {
-    
+    try {
+        const urlId = req.params.urlId;
+
+        const url = await Url.findOne({ urlId });
+        if(!url) {
+            return res.status(404).json("No such url with this urlid")
+        }
+
+        return res.status(200).json(url);
+
+    } catch (error) {
+        console.log(error);
+    }
 }
