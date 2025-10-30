@@ -46,3 +46,23 @@ export const retrieveUrl = async (req, res) => {
         console.log(error);
     }
 }
+
+export const updateUrl = async (req, res) => {
+    const newUrl = req.body.originalUrl;
+    const urlId = req.params.urlId;
+
+    if (validateUrl(newUrl)) {
+        try {
+            const url = await Url.findOneAndUpdate({ urlId }, {originalUrl: newUrl}, { new: true });
+            if(!url) {
+                return res.status(404).json("No such urlId");
+            }
+
+            return res.status(200).json(url)
+        } catch (error) {
+            console.log(error);
+        }
+    } else {
+        return res.json("Invalid URL");
+    }
+}
