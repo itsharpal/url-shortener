@@ -1,7 +1,6 @@
 🏷️ URL Shortener — Backend
 
 A minimal, easy-to-run URL shortener backend built with Node.js, Express and MongoDB (Mongoose). It provides endpoints to create short links, manage them, redirect, and fetch access stats.
-
 ---
 
 ## Table of Contents
@@ -123,3 +122,12 @@ Url document fields:
 - `originalUrl` — target URL (string)
 - `shortUrl` — full shortened URL (string)
 - `accessCount` — number of redirects (number)
+
+---
+
+This repository is part of the roadmap.sh "URL Shortening Service" project:
+
+https://roadmap.sh/projects/url-shortening-service
+
+
+
